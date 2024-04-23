@@ -36,8 +36,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     GreetingImage(
                         message = stringResource(R.string.happy_birthday_text),
-                        from = stringResource(R.string.signature_text),
-                        modifier = Modifier.padding(8.dp)
+                        from = stringResource(R.string.signature_text)
                     )
                 }
             }
@@ -47,6 +46,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
+    // Create a column so that texts don't overlap
     Column(
         verticalArrangement = Arrangement.Center,
         modifier = modifier
@@ -55,7 +55,8 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
             text = message,
             fontSize = 100.sp,
             lineHeight = 116.sp,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(top = 16.dp)
         )
         Text(
             text = from,
@@ -70,6 +71,7 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) {
     val image = painterResource(id = R.drawable.androidparty)
+    // Create a box to overlap image and texts
     Box(modifier) {
         Image(
             painter = image,
@@ -85,17 +87,15 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
                 .padding(8.dp)
         )
     }
-
 }
 
-
-@Preview(showBackground = true)
+@Preview(showBackground = false)
 @Composable
-fun BirthdayCardPreview() {
+private fun BirthdayCardPreview() {
     HappyBirthdayTheme {
         GreetingImage(
-            message = stringResource(id = R.string.happy_birthday_text),
-            from = stringResource(id = R.string.signature_text)
+            message = stringResource(R.string.happy_birthday_text),
+            from = stringResource(R.string.signature_text)
         )
     }
 }
